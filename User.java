@@ -5,34 +5,49 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class User {
-
-	public static void main(String[] args) {
-
-		String inputname = "画像のファイル名";
+	//カメラができなかったので大体の動きだけになってしまった
+	public void camera() {
+		//画像読み込み、カメラの代わり
+		String mark = "C:\\Users\\伊藤　翔哉\\Pictures\\洗濯マーク.png"; //””の中はファイルの場所
 
 		User instA;
 		instA = new User();
-		instA.user(inputname);
+		instA.readMark(mark);
 
 	}
 
-	public void user(String inputname) {
+	public void readMark(String mark) {
 
-		//本来はカメラで読み込みだけど今回は入力ファイルから画像データを読み込み
+		//カメラから読み込まれたデータ
 		try {
-			BufferedImage bImage = ImageIO.read(new File(inputname));
-			//読み込んだ画像をマーク管理に送る
+			BufferedImage markPicture = ImageIO.read(new File(mark));
+			//読み込んだ画像をマーク管理の検索に送る,すいません変数は後で合わせてください
 			Mark instA;
 			instA = new Mark();
-			String kekka = instA(bImage);
-			if (kekka == null) //帰ってきた結果がnullならマーク申請へ追加
-				;
+			Object s = instA.mark(markPicture);
 
 		} catch (IOException e) {
 
 			e.printStackTrace();
 		}
 
+	}
+
+	//マーク申請のメソッド
+	public void applicationMark(String mark) {
+
+		//画像データを読み込み
+		try {
+			BufferedImage markPicture = ImageIO.read(new File(mark));
+			//読み込んだ画像をマーク管理の申請に送る
+			Mark instA;
+			instA = new Mark();
+			instA.mark(markPicture);
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
 	}
 
 }
